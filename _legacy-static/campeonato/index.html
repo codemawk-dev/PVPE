@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campeonato — PVPE</title>
+  <meta name="description" content="Campeonatos de vôlei organizados pelo PVPE: datas, times, inscrições, premiação e contagem regressiva.">
+  <link rel="icon" type="image/png" href="../assets/img/logo-pvpe.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/campeonato.css">
+</head>
+<body class="copa is-loading">
+
+  <header class="copa-header">
+    <div class="copa-wrap copa-topbar">
+      <a href="../" class="copa-back">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        <span>VOLTAR</span>
+      </a>
+      <a href="../" class="brand">PVPE</a>
+      <a href="https://wa.me/5573991335759?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20campeonato%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." data-wa-context target="_blank" rel="noopener" class="btn btn-yellow copa-contact">
+        FALE CONOSCO
+        <svg class="wa-icon" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.5L3 29l6.7-1.7c1.9 1 4.1 1.6 6.3 1.6 7.2 0 13-5.8 13-13S23.2 3 16 3zm0 23.6c-2 0-3.9-.5-5.6-1.5l-.4-.2-4 1 1.1-3.9-.3-.4C5.7 19.9 5.2 18 5.2 16 5.2 10 10 5.2 16 5.2S26.8 10 26.8 16 22 26.6 16 26.6z" fill="currentColor"/>
+          <path d="M22.1 18.9c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-1.1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.1-.3-.2-.7-.4z" fill="currentColor"/>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- estados: carregando / não encontrado -->
+  <div class="copa-wrap copa-state" id="state-loading">
+    <img src="../assets/img/logo-pvpe.png" alt="">
+    <p>Carregando campeonato…</p>
+  </div>
+  <div class="copa-wrap copa-state" id="state-missing" hidden>
+    <img src="../assets/img/logo-pvpe.png" alt="">
+    <h1>Campeonato não encontrado</h1>
+    <p>O link pode estar errado ou o campeonato foi removido.</p>
+    <a href="../" class="btn btn-yellow">VOLTAR PARA O INÍCIO</a>
+  </div>
+
+  <main class="copa-wrap copa-main" id="champ" hidden>
+
+    <!-- BANNER + CONTADOR -->
+    <section class="copa-hero">
+      <img alt="" class="copa-hero-logo" hidden>
+
+      <div class="countdown" id="countdown" aria-live="polite">
+        <span class="countdown-label">FALTAM</span>
+        <div class="countdown-units">
+          <div class="cd-unit"><span class="cd-num" data-unit="d">--</span><span class="cd-txt">DIAS</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit"><span class="cd-num" data-unit="h">--</span><span class="cd-txt">HORAS</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit"><span class="cd-num" data-unit="m">--</span><span class="cd-txt">MIN</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit"><span class="cd-num" data-unit="s">--</span><span class="cd-txt">SEG</span></div>
+        </div>
+        <p class="countdown-live">O CAMPEONATO ESTÁ ROLANDO! 🏐</p>
+      </div>
+    </section>
+
+    <!-- INFORMAÇÕES + TIMES -->
+    <div class="copa-grid">
+      <div class="copa-info">
+        <h1 class="copa-card copa-title" data-field="name"></h1>
+
+        <div class="copa-card copa-when" data-show-any="date_label location">
+          <p data-show="date_label">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+            <span><strong data-field="date_label"></strong><span data-show="time_label"> · <span data-field="time_label"></span></span></span>
+          </p>
+          <p data-show="location">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+            <span>LOCAL: <strong data-field="location"></strong></span>
+          </p>
+        </div>
+
+        <div class="copa-card copa-about" data-show="description">
+          <h2>SOBRE O CAMPEONATO</h2>
+          <p data-field="description"></p>
+        </div>
+      </div>
+
+      <section class="copa-card copa-teams" data-show-any="teams_female teams_male">
+        <h2>TIMES</h2>
+        <div class="teams-cols">
+          <div class="teams-col">
+            <h3><span class="tag-fem">FEMININO</span> <small data-count="teams_female"></small></h3>
+            <ol data-list="teams_female"></ol>
+          </div>
+          <div class="teams-col">
+            <h3><span class="tag-masc">MASCULINO</span> <small data-count="teams_male"></small></h3>
+            <ol data-list="teams_male"></ol>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- INSCRIÇÕES + PREMIAÇÃO -->
+    <section class="copa-prizes" id="premiacao" data-show-any="registration_fee prize_first prize_second">
+      <div class="prize-block" data-show="registration_fee">
+        <h2 class="brush">INSCRIÇÕES</h2>
+        <div class="prize-card prize-card--tall" data-registration>
+          <span class="closed-stamp" hidden>INSCRIÇÕES<br>ENCERRADAS</span>
+          <svg class="prize-icon" viewBox="0 0 64 64" aria-hidden="true">
+            <rect x="12" y="10" width="40" height="48" rx="5" class="gold-stroke"/>
+            <rect x="23" y="5" width="18" height="10" rx="3" class="gold-fill"/>
+            <circle cx="22" cy="27" r="2.6" class="gold-fill"/><path d="M29 27h15" class="gold-stroke"/>
+            <circle cx="22" cy="37" r="2.6" class="gold-fill"/><path d="M29 37h15" class="gold-stroke"/>
+            <circle cx="22" cy="47" r="2.6" class="gold-fill"/><path d="M29 47h15" class="gold-stroke"/>
+          </svg>
+          <div class="prize-text">
+            <strong class="prize-value" data-field="registration_fee"></strong>
+            <span class="prize-sub" data-field="registration_fee_note"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prize-block" data-show-any="prize_first prize_second">
+        <h2 class="brush">PREMIAÇÃO</h2>
+        <div class="prize-card" data-show="prize_first">
+          <svg class="prize-icon" viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M18 8h28v14a14 14 0 0 1-28 0z" class="gold-fill"/>
+            <path d="M18 13H9a9 9 0 0 0 11 11M46 13h9a9 9 0 0 1-11 11" class="gold-stroke"/>
+            <path d="M28 35h8v9h-8z" class="gold-fill"/>
+            <path d="M21 44h22l2 7H19z" class="gold-fill"/>
+            <rect x="15" y="51" width="34" height="8" rx="2" fill="#1b1b22" stroke="#ffd600" stroke-width="2"/>
+            <path d="M25 12v10" stroke="#fff6c4" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+          </svg>
+          <div class="prize-text">
+            <span class="prize-label">1º LUGAR</span>
+            <strong class="prize-value" data-field="prize_first"></strong>
+            <span class="prize-sub" data-field="prize_first_extra"></span>
+          </div>
+        </div>
+        <div class="prize-card" data-show="prize_second">
+          <svg class="prize-icon" viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M16 4h10l8 18h-10zM48 4H38l-8 18h10z" fill="#2c6be0" stroke="#ffd600" stroke-width="1.5"/>
+            <circle cx="32" cy="40" r="18" class="gold-fill"/>
+            <circle cx="32" cy="40" r="12.5" fill="none" stroke="#a87400" stroke-width="2"/>
+            <path d="M32 31.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" fill="#fff3b0"/>
+          </svg>
+          <div class="prize-text">
+            <span class="prize-label">2º LUGAR</span>
+            <strong class="prize-value" data-field="prize_second"></strong>
+          </div>
+        </div>
+      </div>
+
+      <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+        <defs>
+          <linearGradient id="gold" gradientUnits="userSpaceOnUse" x1="0" y1="4" x2="0" y2="60">
+            <stop offset="0" stop-color="#ffe680"/>
+            <stop offset=".5" stop-color="#ffc21a"/>
+            <stop offset="1" stop-color="#c98a00"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p class="footer-copy">© 2026 PVPE — Projeto de Vôlei Pedro Eduardo · Uruçuca - BA</p>
+    <a href="https://instagram.com/codemawk" target="_blank" rel="noopener" class="dev-tag">
+      <span class="dev-dot"></span>
+      Desenvolvido por <strong>code<b>MAWK</b></strong>
+    </a>
+  </footer>
+
+  <script type="module" src="../assets/js/campeonato.js"></script>
+</body>
+</html>

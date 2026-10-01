@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Painel PVPE</title>
+  <link rel="icon" type="image/png" href="../assets/img/logo-pvpe.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+
+  <!-- carregando -->
+  <div class="boot" id="boot">
+    <img src="../assets/img/logo-pvpe.png" alt="">
+    <span>Carregando painel…</span>
+  </div>
+
+  <!-- LOGIN (só no modo Supabase) -->
+  <main class="login" id="login" hidden>
+    <form class="login-box" id="login-form">
+      <img src="../assets/img/logo-pvpe.png" alt="PVPE" class="login-logo">
+      <h1>Painel PVPE</h1>
+      <p>Entre com o e-mail e a senha de administrador.</p>
+      <label class="field">
+        <span>E-mail</span>
+        <input type="email" name="email" autocomplete="username" required>
+      </label>
+      <label class="field">
+        <span>Senha</span>
+        <input type="password" name="password" autocomplete="current-password" required>
+      </label>
+      <p class="form-error" id="login-error" hidden></p>
+      <button type="submit" class="a-btn a-btn--primary a-btn--block">Entrar</button>
+      <a href="../" class="login-back">← Voltar ao site</a>
+    </form>
+  </main>
+
+  <!-- PAINEL -->
+  <div class="app" id="app" hidden>
+    <aside class="sidebar">
+      <a href="#games" class="side-brand">
+        <img src="../assets/img/logo-pvpe.png" alt="">
+        <span>PVPE <small>Painel</small></span>
+      </a>
+      <nav class="side-nav" id="nav"></nav>
+      <div class="side-foot">
+        <span class="mode-badge" id="mode-badge"></span>
+        <a href="../" target="_blank" rel="noopener" class="side-link">Ver site ↗</a>
+        <button type="button" class="side-link" id="reset-btn" hidden>Restaurar dados originais</button>
+        <button type="button" class="side-link" id="logout-btn" hidden>Sair</button>
+      </div>
+    </aside>
+
+    <main class="content">
+      <div class="local-warning" id="local-warning" hidden>
+        <strong>Modo local.</strong> O Supabase ainda não está conectado: as alterações ficam salvas só neste navegador
+        e aparecem no site apenas aqui. Para publicar de verdade, preencha <code>assets/js/config.js</code>.
+      </div>
+
+      <header class="content-head">
+        <div>
+          <h1 id="view-title"></h1>
+          <p id="view-desc"></p>
+        </div>
+        <button type="button" class="a-btn a-btn--primary" id="new-btn">+ Novo</button>
+      </header>
+
+      <section class="list" id="list" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <!-- FORMULÁRIO (criar/editar) -->
+  <dialog class="drawer" id="drawer" aria-labelledby="drawer-title">
+    <form class="drawer-box" id="drawer-form" novalidate>
+      <header class="drawer-head">
+        <h2 id="drawer-title"></h2>
+        <button type="button" class="icon-btn" data-close aria-label="Fechar">&times;</button>
+      </header>
+      <div class="drawer-body" id="drawer-body"></div>
+      <footer class="drawer-foot">
+        <p class="form-error" id="form-error" hidden></p>
+        <button type="button" class="a-btn" data-close>Cancelar</button>
+        <button type="submit" class="a-btn a-btn--primary" id="save-btn">Salvar</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <script type="module" src="../assets/js/admin/app.js"></script>
+</body>
+</html>

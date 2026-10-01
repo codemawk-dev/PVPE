@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Página não encontrada — PVPE</title>
+  <!--
+    Hospedagens como Netlify, Vercel e GitHub Pages mostram este arquivo para
+    qualquer endereço que não existe. Se o endereço for o de um campeonato
+    (ex.: /copa-de-verao/), redirecionamos para a página-modelo.
+    Os caminhos são absolutos (/assets/...) porque esta página pode ser servida
+    em qualquer profundidade: o site precisa estar na raiz do domínio.
+  -->
+  <link rel="icon" type="image/png" href="/assets/img/logo-pvpe.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <style>
+    .nf {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      min-height: 100vh;
+      padding: 32px 16px;
+      text-align: center;
+    }
+
+    .nf img {
+      width: 150px;
+    }
+
+    .nf strong {
+      font-size: 96px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--yellow);
+    }
+
+    .nf h1 {
+      font-size: 28px;
+      font-weight: 500;
+    }
+
+    .nf p {
+      max-width: 420px;
+      color: rgba(255, 255, 255, .7);
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .nf .btn {
+      height: 54px;
+      margin-top: 8px;
+      padding: 0 32px;
+      font-size: 18px;
+    }
+
+    .nf.is-checking > :not(img) {
+      visibility: hidden;
+    }
+  </style>
+</head>
+<body>
+  <main class="nf is-checking" id="nf">
+    <img src="/assets/img/logo-pvpe.png" alt="PVPE">
+    <strong>404</strong>
+    <h1>Essa página saiu da quadra</h1>
+    <p>O endereço que você tentou abrir não existe ou foi removido.</p>
+    <a href="/" class="btn btn-yellow">VOLTAR PARA O INÍCIO</a>
+  </main>
+
+  <script type="module">
+    const nf = document.getElementById('nf');
+    const slug = location.pathname.split('/').filter(Boolean)[0] || '';
+    let redirecting = false;
+
+    try {
+      if (/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug)) {
+        const { getDb } = await import('/assets/js/data/store.js');
+        const db = await getDb();
+        if (await db.findBy('championships', 'slug', slug)) {
+          redirecting = true;
+          location.replace(`/campeonato/?c=${encodeURIComponent(slug)}`);
+        }
+      }
+    } catch (err) {
+      console.warn('[PVPE] 404:', err);
+    }
+    if (!redirecting) nf.classList.remove('is-checking');
+  </script>
+</body>
+</html>

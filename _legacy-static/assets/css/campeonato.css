@@ -1,0 +1,784 @@
+/* ============ PÁGINA: 1º COPA DO MEL DE VÔLEI ============ */
+:root {
+  --blue: #004aad;
+  --blue-deep: #061a4d;
+  --blue-mid: #0b2c7a;
+  --blue-light: #1f6fe0;
+  --honey: #f5a300;
+}
+
+body.copa {
+  color: var(--blue-deep);
+  background-color: #f2f5fc;
+  /* favo de mel bem sutil */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='98' viewBox='0 0 56 98'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34L28 66zm0 32L0 82V66l28 16 28-16v16L28 98z' fill='none' stroke='%23004aad' stroke-opacity='.06' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.copa-wrap {
+  width: 100%;
+  max-width: 1246px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ---------- TOPO ---------- */
+.copa-header {
+  background: var(--blue-deep);
+  border-bottom: 3px solid var(--yellow);
+  color: var(--white);
+}
+
+.copa-topbar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 76px;
+}
+
+.copa-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-self: start;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: .5px;
+  transition: color .2s ease;
+}
+
+.copa-back:hover {
+  color: var(--yellow);
+}
+
+.copa-back svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.copa-contact {
+  justify-self: end;
+  height: 46px;
+  padding: 0 18px;
+  gap: 12px;
+  font-size: 16px;
+}
+
+/* ---------- BANNER + CONTADOR ---------- */
+.copa-main {
+  padding-top: 32px;
+  padding-bottom: 72px;
+}
+
+.copa-hero {
+  container-type: inline-size;
+  position: relative;
+  aspect-ratio: 1214 / 367;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #1f4fb4;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 0 14px 34px rgba(6, 26, 77, .22);
+}
+
+/* sem imagem de fundo cadastrada: degradê azul com favo de mel */
+.copa-hero--plain {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='98' viewBox='0 0 56 98'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34L28 66zm0 32L0 82V66l28 16 28-16v16L28 98z' fill='none' stroke='%23ffd600' stroke-opacity='.12' stroke-width='2'/%3E%3C/svg%3E"),
+    linear-gradient(120deg, var(--blue-deep) 0%, var(--blue) 55%, var(--blue-light) 100%);
+  background-size: 56px 98px, cover;
+  background-repeat: repeat, no-repeat;
+}
+
+/* sem logo: contador centralizado */
+.copa-hero--no-logo .countdown {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* sem contador: logo centralizada */
+.copa-hero--no-countdown .copa-hero-logo {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.copa-hero-logo {
+  position: absolute;
+  left: 15.15%;
+  top: 2.2%;
+  width: 29%;
+  max-width: none;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .25));
+}
+
+.countdown {
+  position: absolute;
+  left: 53.9%;
+  top: 21.8%;
+  width: 38.4%;
+  height: 56.1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .9cqw;
+  border: 2px solid var(--yellow);
+  border-radius: 1cqw;
+  background: rgba(6, 26, 77, .72);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: var(--white);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+}
+
+.countdown-label {
+  font-size: 1.15cqw;
+  font-weight: 700;
+  letter-spacing: .5cqw;
+  color: var(--yellow);
+}
+
+.countdown-units {
+  display: flex;
+  align-items: flex-start;
+  gap: .8cqw;
+}
+
+.cd-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 6.4cqw;
+}
+
+.cd-num {
+  font-size: 4.4cqw;
+  font-weight: 900;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--yellow);
+  text-shadow: 0 .2cqw 0 rgba(0, 0, 0, .25);
+}
+
+.cd-txt {
+  margin-top: .5cqw;
+  font-size: .95cqw;
+  font-weight: 500;
+  letter-spacing: .15cqw;
+}
+
+.cd-sep {
+  font-size: 3.6cqw;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(255, 255, 255, .5);
+}
+
+.countdown-live {
+  display: none;
+  padding: 0 1.5cqw;
+  font-size: 2cqw;
+  font-weight: 900;
+  text-align: center;
+  color: var(--yellow);
+}
+
+.countdown.is-live .countdown-label,
+.countdown.is-live .countdown-units,
+.countdown.is-over .countdown-label,
+.countdown.is-over .countdown-units {
+  display: none;
+}
+
+.countdown.is-live .countdown-live,
+.countdown.is-over .countdown-live {
+  display: block;
+}
+
+.countdown.is-live {
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% { box-shadow: 0 0 0 .6cqw rgba(255, 214, 0, .25); }
+}
+
+/* ---------- CARREGANDO / NÃO ENCONTRADO ---------- */
+.copa-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 60vh;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  text-align: center;
+  color: var(--blue-deep);
+}
+
+.copa-state img {
+  width: 110px;
+}
+
+#state-loading img {
+  animation: champ-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes champ-pulse {
+  50% { opacity: .5; transform: scale(.95); }
+}
+
+.copa-state h1 {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--blue);
+}
+
+.copa-state p {
+  font-size: 17px;
+  color: #33405f;
+}
+
+.copa-state .btn {
+  height: 52px;
+  margin-top: 8px;
+  padding: 0 28px;
+  font-size: 17px;
+}
+
+/* ---------- CARDS ---------- */
+.copa-grid {
+  display: grid;
+  grid-template-columns: 589fr 614fr;
+  gap: 20px;
+  margin-top: 56px;
+}
+
+/* sem times: as informações ocupam a largura toda */
+.copa-grid:has(> .copa-teams[hidden]) {
+  grid-template-columns: 1fr;
+}
+
+.copa-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.copa-card {
+  border-radius: 10px;
+  padding: 26px 40px;
+}
+
+.copa-title {
+  text-transform: uppercase;
+  background: var(--yellow);
+  color: var(--wine);
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1.1;
+  box-shadow: 0 8px 20px rgba(245, 163, 0, .25);
+}
+
+.copa-when {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: linear-gradient(120deg, var(--blue) 0%, var(--blue-light) 100%);
+  color: var(--white);
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+.copa-when p {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.copa-when strong {
+  color: var(--yellow);
+}
+
+.copa-when svg,
+.copa-about h2::before {
+  flex-shrink: 0;
+}
+
+.copa-when svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: var(--yellow);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.copa-about {
+  flex: 1;
+  background: var(--white);
+  box-shadow: 0 8px 24px rgba(6, 26, 77, .08);
+}
+
+.copa-about h2 {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--blue);
+}
+
+.copa-about p {
+  margin-top: 12px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #33405f;
+}
+
+/* times */
+.copa-teams {
+  padding: 26px 32px 32px;
+  background: linear-gradient(160deg, var(--blue-mid) 0%, var(--blue) 100%);
+  color: var(--white);
+  box-shadow: 0 14px 34px rgba(6, 26, 77, .2);
+}
+
+.copa-teams h2 {
+  font-size: 44px;
+  font-weight: 900;
+  text-align: center;
+  color: var(--yellow);
+}
+
+.teams-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 22px;
+}
+
+.teams-col h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, .2);
+}
+
+.teams-col h3 small {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, .7);
+}
+
+.tag-fem,
+.tag-masc {
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.tag-fem {
+  background: var(--yellow);
+  color: var(--wine);
+}
+
+.tag-masc {
+  background: var(--white);
+  color: var(--blue);
+}
+
+.teams-col ol {
+  list-style: none;
+  counter-reset: team;
+}
+
+.teams-col li {
+  counter-increment: team;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.teams-col li::before {
+  content: counter(team);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 214, 0, .15);
+  border: 1px solid var(--yellow);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--yellow);
+}
+
+/* inscrições + premiação */
+.copa-prizes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 28px;
+  padding: 40px;
+  border-radius: 10px;
+  /* fundo padrão; o script usa a imagem de fundo do campeonato quando existir */
+  background: linear-gradient(140deg, var(--blue-deep) 0%, var(--blue-mid) 60%, var(--blue) 100%);
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 14px 34px rgba(6, 26, 77, .22);
+}
+
+/* só inscrição ou só premiação: um bloco centralizado */
+.copa-prizes:has(> .prize-block[hidden]) {
+  grid-template-columns: minmax(0, 560px);
+  justify-content: center;
+}
+
+.prize-block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* faixa amarela estilo pincelada */
+.brush {
+  align-self: center;
+  position: relative;
+  z-index: 1;
+  margin-bottom: -30px;
+  padding: 10px 40px 14px;
+  background: var(--yellow);
+  color: #111;
+  font-size: 38px;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -.5px;
+  transform: rotate(-3deg);
+  clip-path: polygon(3% 8%, 12% 0, 30% 6%, 52% 1%, 74% 7%, 92% 0, 100% 14%, 97% 52%, 100% 88%, 86% 100%, 64% 93%, 42% 100%, 22% 94%, 6% 100%, 0 82%, 3% 46%);
+  filter: drop-shadow(0 4px 0 rgba(0, 0, 0, .35));
+}
+
+.prize-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 26px 30px;
+  border: 2px solid var(--yellow);
+  border-radius: 12px;
+  background: linear-gradient(160deg, #1b1b22 0%, #0b0b10 100%);
+  color: var(--white);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .35);
+  transition: transform .2s ease;
+}
+
+.prize-card:hover {
+  transform: translateY(-3px);
+}
+
+.prize-block .brush + .prize-card {
+  padding-top: 44px;
+}
+
+.prize-card--tall {
+  flex: 1;
+  justify-content: center;
+  gap: 32px;
+}
+
+.prize-card--tall .prize-icon {
+  width: 128px;
+  height: 128px;
+}
+
+.prize-card--tall .prize-value {
+  font-size: 84px;
+}
+
+.prize-card--tall .prize-sub {
+  font-size: 28px;
+}
+
+/* inscrições encerradas */
+.prize-card.is-closed {
+  position: relative;
+  overflow: hidden;
+}
+
+.prize-card.is-closed:hover {
+  transform: none;
+}
+
+.prize-card.is-closed .prize-icon,
+.prize-card.is-closed .prize-text {
+  opacity: .35;
+  filter: grayscale(1);
+}
+
+.prize-card.is-closed .prize-value {
+  text-decoration: line-through;
+  text-decoration-thickness: 4px;
+}
+
+.closed-stamp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  padding: 10px 22px;
+  border: 4px solid #ff3b3b;
+  border-radius: 8px;
+  background: rgba(11, 11, 16, .82);
+  color: #ff3b3b;
+  font-size: 30px;
+  font-weight: 900;
+  font-style: italic;
+  line-height: 1.05;
+  letter-spacing: 1px;
+  text-align: center;
+  white-space: nowrap;
+  transform: translate(-50%, -50%) rotate(-8deg);
+  box-shadow: 0 0 0 3px rgba(255, 59, 59, .2);
+}
+
+.prize-icon {
+  flex-shrink: 0;
+  width: 96px;
+  height: 96px;
+  filter: drop-shadow(0 4px 8px rgba(255, 194, 26, .25));
+}
+
+.prize-icon .gold-fill {
+  fill: url(#gold);
+}
+
+.prize-icon .gold-stroke {
+  fill: none;
+  stroke: url(#gold);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.prize-icon rect.gold-stroke {
+  stroke: #ffc21a;
+}
+
+.prize-text {
+  display: flex;
+  flex-direction: column;
+  font-style: italic;
+  line-height: 1;
+}
+
+.prize-label {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.prize-value {
+  margin-top: 4px;
+  font-size: 56px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.prize-sub {
+  margin-top: 6px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+/* ---------- RESPONSIVO ---------- */
+@media (max-width: 1000px) {
+  .copa-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .copa-prizes {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .copa-topbar {
+    height: 64px;
+  }
+
+  .copa-back span,
+  .copa-contact {
+    font-size: 0;
+    gap: 0;
+  }
+
+  .copa-contact {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+  }
+
+  .copa-main {
+    padding-top: 20px;
+    padding-bottom: 48px;
+  }
+
+  .copa-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    aspect-ratio: auto;
+    padding: 18px 16px 20px;
+    background-position: 30% center;
+  }
+
+  .copa-hero--no-logo .countdown,
+  .copa-hero--no-countdown .copa-hero-logo {
+    transform: none;
+  }
+
+  .copa-hero-logo {
+    position: static;
+    width: 230px;
+    max-width: 75%;
+  }
+
+  .countdown {
+    position: static;
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    padding: 14px 8px;
+    gap: 6px;
+    border-radius: 10px;
+  }
+
+  .countdown-label {
+    font-size: 12px;
+    letter-spacing: 4px;
+  }
+
+  .countdown-units {
+    gap: 4px;
+  }
+
+  .cd-unit {
+    min-width: 56px;
+  }
+
+  .cd-num {
+    font-size: 36px;
+  }
+
+  .cd-txt {
+    margin-top: 4px;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+
+  .cd-sep {
+    font-size: 28px;
+  }
+
+  .countdown-live {
+    font-size: 18px;
+  }
+
+  .copa-grid {
+    margin-top: 28px;
+    gap: 16px;
+  }
+
+  .copa-info {
+    gap: 16px;
+  }
+
+  .copa-card {
+    padding: 20px;
+  }
+
+  .copa-title {
+    font-size: 26px;
+  }
+
+  .copa-when {
+    font-size: 17px;
+  }
+
+  .copa-teams h2 {
+    font-size: 32px;
+  }
+
+  .teams-cols {
+    grid-template-columns: 1fr;
+  }
+
+  .copa-prizes {
+    padding: 28px 16px;
+    gap: 36px;
+  }
+
+  .brush {
+    font-size: 28px;
+    padding: 8px 28px 12px;
+    margin-bottom: -24px;
+  }
+
+  .prize-card {
+    gap: 16px;
+    padding: 20px 18px;
+  }
+
+  .prize-block .brush + .prize-card {
+    padding-top: 36px;
+  }
+
+  .prize-icon {
+    width: 68px;
+    height: 68px;
+  }
+
+  .prize-label,
+  .prize-sub {
+    font-size: 16px;
+  }
+
+  .prize-value,
+  .prize-card--tall .prize-value {
+    font-size: 38px;
+  }
+
+  .prize-card--tall .prize-icon {
+    width: 68px;
+    height: 68px;
+  }
+
+  .prize-card--tall .prize-sub {
+    font-size: 16px;
+  }
+
+  .closed-stamp {
+    font-size: 20px;
+    padding: 8px 14px;
+    border-width: 3px;
+  }
+
+  .prize-card--tall {
+    justify-content: flex-start;
+    gap: 16px;
+  }
+}

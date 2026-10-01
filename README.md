@@ -51,4 +51,3 @@ _legacy-static/       versão estática anterior (HTML/CSS/JS), só como referê
 ```
 
 Para adicionar um campo: `lib/types.ts`, `components/admin/resources.tsx` e a coluna em `supabase/schema.sql`.
-# PVPE
