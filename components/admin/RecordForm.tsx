@@ -55,7 +55,6 @@ export function RecordForm({ resource, record, onCancel, onSubmit }: Props) {
       className="drawer"
       aria-labelledby="drawer-title"
       onCancel={(ev) => { ev.preventDefault(); onCancel(); }}
-      onClick={(ev) => { if (ev.target === dialog.current) onCancel(); }}
     >
       <form ref={form} className="drawer-box" noValidate onSubmit={handleSubmit}>
         <header className="drawer-head">
