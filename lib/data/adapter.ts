@@ -19,5 +19,7 @@ export interface DataAdapter {
     getUser(): Promise<AdminUser | null>;
     signIn(email: string, password: string): Promise<AdminUser>;
     signOut(): Promise<void>;
+    /** token da sessão, enviado ao servidor para provar o login (null no modo local) */
+    getAccessToken(): Promise<string | null>;
   };
 }

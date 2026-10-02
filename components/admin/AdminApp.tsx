@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { getDb } from '@/lib/data/client';
+import { revalidateSite } from '@/lib/data/revalidate';
 import type { DataAdapter } from '@/lib/data/adapter';
 import type { TableName } from '@/lib/types';
 import { RecordForm } from './RecordForm';
@@ -120,6 +121,14 @@ function Panel({ db }: { db: DataAdapter }) {
   const loading = !list || list.key !== `${current}:${reload}`;
   const refresh = () => setReload((n) => n + 1);
 
+  // Atualiza as páginas públicas na hora, sem travar o painel enquanto isso.
+  function publish() {
+    if (db.mode !== 'supabase') return;
+    db.auth.getAccessToken()
+      .then(revalidateSite)
+      .catch((err) => toast(`Salvo, mas o site pode levar até 1 minuto para atualizar (${(err as Error).message}).`, true));
+  }
+
   async function save(data: Record<string, unknown>, files: Map<string, File>) {
     const record = editing?.record ?? null;
     for (const [name, file] of files) {
@@ -128,15 +137,16 @@ function Panel({ db }: { db: DataAdapter }) {
     }
     if (r.beforeSave) data = r.beforeSave(data);
 
-    const all = (await db.list(r.table)) as unknown as AnyRow[];
-    const others = all.filter((o) => o.id !== record?.id);
-    if (r.unique && others.some((o) => o[r.unique!.field] === data[r.unique!.field])) {
-      throw new Error(r.unique.message);
-    }
-    // destaque / principal: desmarca nos outros registros
-    if (r.exclusiveFlag && data[r.exclusiveFlag]) {
-      for (const o of others) {
-        if (o[r.exclusiveFlag]) await db.update(r.table, o.id, { [r.exclusiveFlag]: false });
+    // só busca os outros registros quando há regra que depende deles
+    const flag = r.exclusiveFlag;
+    if (r.unique || (flag && data[flag])) {
+      const others = ((await db.list(r.table)) as unknown as AnyRow[]).filter((o) => o.id !== record?.id);
+      if (r.unique && others.some((o) => o[r.unique!.field] === data[r.unique!.field])) {
+        throw new Error(r.unique.message);
+      }
+      // destaque / principal: desmarca nos outros registros
+      if (flag && data[flag]) {
+        await Promise.all(others.filter((o) => o[flag]).map((o) => db.update(r.table, o.id, { [flag]: false })));
       }
     }
 
@@ -146,6 +156,7 @@ function Panel({ db }: { db: DataAdapter }) {
     setEditing(null);
     toast(`${cap(r.singular)} ${record ? 'atualizado' : 'criado'}.`);
     refresh();
+    publish();
   }
 
   async function remove(row: AnyRow) {
@@ -154,6 +165,7 @@ function Panel({ db }: { db: DataAdapter }) {
       await db.remove(r.table, row.id);
       toast(`${cap(r.singular)} excluído.`);
       refresh();
+      publish();
     } catch (ex) {
       toast(`Erro ao excluir: ${(ex as Error).message}`, true);
     }

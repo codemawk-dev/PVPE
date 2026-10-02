@@ -130,6 +130,7 @@ export function createLocalAdapter(): DataAdapter {
       async getUser() { return { email: 'modo-local' }; },
       async signIn() { return { email: 'modo-local' }; },
       async signOut() {},
+      async getAccessToken() { return null; },
     },
   };
 }
